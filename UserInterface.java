@@ -1,10 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileReader;
 
 public class UserInterface implements ActionListener {
     private ImageIcon programIcon;
@@ -81,19 +78,17 @@ public class UserInterface implements ActionListener {
 
     }
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         try {
             if (!textArea.getText().isEmpty()) {
                 DecimalCalculation dc = new DecimalCalculation(textArea.getText().trim());
                 String[] decimalResults = dc.decimalConvert();
-
                 this.textArea.setText(decimalResults[3]);
                 this.textArea2.setText(decimalResults[0]);
                 this.textArea3.setText(decimalResults[1]);
                 this.textArea4.setText(decimalResults[2]);
-                // TODO
             }
-            if(!textArea2.getText().isEmpty()){
+            if (!textArea2.getText().isEmpty()) {
                 BinaryCalculation bc = new BinaryCalculation(textArea2.getText().trim());
                 String[] binaryResults = bc.binaryConvert();
                 this.textArea.setText(binaryResults[3]);
@@ -101,13 +96,32 @@ public class UserInterface implements ActionListener {
                 this.textArea3.setText(binaryResults[1]);
                 this.textArea4.setText(binaryResults[2]);
             }
-        }catch(Exception err){
 
-        }
-
-
+            if(!textArea4.getText().isEmpty()){
+                HexCalculation bc = new HexCalculation(textArea4.getText().trim());
+                String[] hexResults = bc.hexConvert();
+                this.textArea.setText(hexResults[3]);
+                this.textArea2.setText(hexResults[0]);
+                this.textArea3.setText(hexResults[1]);
+                this.textArea4.setText(hexResults[2]);
+            }
+            if(!textArea3.getText().isEmpty()){
+                OctalCalculation bc = new OctalCalculation(textArea3.getText().trim());
+                String[] octalResults = bc.octalConvert();
+                this.textArea.setText(octalResults[3]);
+                this.textArea2.setText(octalResults[0]);
+                this.textArea3.setText(octalResults[1]);
+                this.textArea4.setText(octalResults[2]);
+            }
+            }catch(Exception err){
+                System.out.println(err.getMessage());
+            }
 
     }
+
+
+
+
     void setResetBtn(){
         resetBtn.setVisible(true);
         resetBtn.setBounds(100,300,100,100);
